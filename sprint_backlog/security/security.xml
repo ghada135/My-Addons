@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_sprint_lines" model="res.groups">
+        <field name="name">Sprint Backlog Lines</field>
+    </record>
+    <record id="group_sprint" model="res.groups">
+        <field name="name">Sprint Backlog</field>
+        <field name="implied_ids" eval="[(4, ref('sprint_backlog.group_sprint_lines'))]"/>
+    </record>
+
+    <record id="tasks_rule" model="ir.rule">
+        <field name="name">Tasks Rules</field>
+        <field name="model_id" ref="model_sprint_backlog_line"/>
+        <field eval="False" name="global"/>
+        <field name="groups" eval="[(4, ref('sprint_backlog.group_sprint_lines'))]"/>
+        <field name="domain_force">[('developer_id', '=', user.id)]</field>
+    </record>
+    <record id="tasks_rule_backlog" model="ir.rule">
+        <field name="name">Tasks Rules Backlog</field>
+        <field name="model_id" ref="model_sprint_backlog_line"/>
+        <field eval="False" name="global"/>
+        <field name="groups" eval="[(4, ref('sprint_backlog.group_sprint'))]"/>
+    </record>
+
+</odoo>

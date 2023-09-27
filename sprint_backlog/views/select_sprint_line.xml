@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="action_select_sprint_line_tree">
+            <field name="name">sprint.backlog.line.tree</field>
+            <field name="model">sprint.backlog.line</field>
+            <field name="arch" type="xml">
+                <tree string="Sprint Backlog Line" editable="bottom">
+                    <field name="backlog_sprint_id" readonly="1"/>
+                    <field name="task_id" readonly="1"/>
+                    <field name="project_id"/>
+                    <field name="developer_id"/>
+                    <field name="hours" readonly="1" sum="Total Hours"/>
+                    <field name="notes"/>
+                    <field name="task_weight" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_sprint_backlog_line_search" model="ir.ui.view">
+            <field name="name">sprint.backlog.line.search</field>
+            <field name="model">sprint.backlog.line</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="backlog_sprint_id"/>
+                    <field name="task_id"/>
+                    <field name="project_id"/>
+                    <field name="developer_id"/>
+                    <field name="task_weight"/>
+                    <field name="hours"/>
+                    <separator/>
+                    <filter string="Assigned Developer" name="developer_id" domain="[]"
+                            context="{'group_by':'developer_id'}"/>
+                    <filter string="Backlog Sprint" name="backlog_sprint_id" domain="[]"
+                            context="{'group_by':'backlog_sprint_id'}"/>
+                    <filter string="Task Weight" name="task_weight" domain="[]" context="{'group_by':'task_weight'}"/>
+                    <filter string="Project" name="project_id" domain="[]" context="{'group_by':'project_id'}"/>
+                    <filter string="Hours" name="hours" domain="[]" context="{'group_by':'hours'}"/>
+                </search>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="action_sprint_lines_pivot">
+            <field name="name">sprint.backlog.line</field>
+            <field name="model">sprint.backlog.line</field>
+            <field name="arch" type="xml">
+                <pivot string="Sprint Lines">
+                    <field name="sequence" type="measure" string="Sequence"/>
+                    <field name="task_id" type="measure" string="Task"/>
+                    <field name="project_id" type="measure" string="Project"/>
+                    <field name="backlog_sprint_id" type="measure" string="Backlog"/>
+                    <field name="developer_id" type="measure" string="Developer"/>
+                    <field name="hours" type="measure" string="Hours"/>
+                    <field name="task_weight" type="measure" string="Weight"/>
+                    <field name="status" type="measure" string="Status"/>
+                    <field name="stage_id" type="measure" string="Stage"/>
+                    <field name="approval_status" type="measure" string="Approval Status"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="action_select_sprint_line" model="ir.actions.act_window">
+            <field name="name">Select Sprint Line</field>
+            <field name="res_model">sprint.backlog.line</field>
+            <field name="view_mode">tree,pivot</field>
+        </record>
+        <record id="action_select_sprint_bug_line" model="ir.actions.act_window">
+            <field name="name">Select Sprint Bugs Line</field>
+            <field name="res_model">sprint.backlog.bugs</field>
+            <field name="view_mode">tree,pivot</field>
+        </record>
+        <menuitem id="menu_sprint_backlog_line"
+                  name="Sprint Backlog Line"
+                  action="action_select_sprint_line"
+                  parent="sprint_backlog.menu_sprint_backlog_parent"
+                  sequence="20"
+                  groups="sprint_backlog.group_sprint_lines"/>
+
+        <menuitem id="menu_sprint_backlog_bugs_line"
+                  name="Sprint Backlog Bugs Line"
+                  action="action_select_sprint_bug_line"
+                  parent="sprint_backlog.menu_sprint_backlog_parent"
+                  sequence="20"
+                  groups="sprint_backlog.group_sprint_lines"/>
+    </data>
+</odoo>

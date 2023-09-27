@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="sprint_backlogview_form" model="ir.ui.view">
+        <field name="name">sprint.backlog.form</field>
+        <field name="model">sprint.backlog</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="reset_draft" type="object" string="Reset To Draft" class="oe_highlight"
+                            attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                    <button name="start_spring" type="object" string="Start Sprint" class="oe_highlight"
+                            states="draft"/>
+                    <button name="send_by_mail" type="object" string="Send By Email" class="oe_highlight"
+                            attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                    <button name="close_spring" type="object" string="Close Sprint" class="oe_highlight"
+                            attrs="{'invisible': [('state', 'not in', ['draft', 'running','email_sent'])]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,running,email_sent,closed"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="description" readonly="1"/>
+                            <field name="start_date" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                            <field name="end_date" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                            <field name="task_ids" invisible="1" widget="many2many_tags"/>
+                            <field name="task_line_bugs_ids" invisible="1" widget="many2many_tags"/>
+                            <field name="task_bugs_ids" invisible="1" widget="many2many_tags"/>
+                            <field name="task_bug_ids" invisible="1" widget="many2many_tags"/>
+                            <field name="task_lines_ids" widget="many2many_tags" invisible="1"/>
+
+                        </group>
+                        <group>
+                            <field name="sprint_progress" widget="progressbar"/>
+                            <field name="sprint_bug_progress" widget="progressbar"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Backlog Sprint Lines" name="sprint_lines">
+                            <div>
+                                <button name="%(act_open_select_products_view)d" type="action" string="Select Tasks"
+                                        context="{'default_flag_order': 'task',
+                                        'default_sprint_id':active_id}"
+                                        class="oe_highlight"/>
+                                <button name="compute_status" type="object" string="Tasks Status"
+                                        attrs="{'invisible': [('state', '=', 'closed')]}"/>
+                            </div>
+                            <field name="backlog_sprint_ids" attrs="{'readonly': [('state', '=', 'closed')]}"
+                                   nolabel="0" widget="one2many" mode="tree">
+                                <tree string="Backlog Sprint Lines" editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="active" invisible="1"/>
+                                    <field name="task_id" domain="[('id', 'not in', task_ids)]"/>
+                                    <field name="tag_ids" widget="many2many_tags"
+                                           options="{'color_field': 'color', 'no_create_edit': True}"/>
+                                    <field name="task_ids" invisible="1" widget="many2many_tags"/>
+                                    <field name="stage_id"/>
+                                    <field name="user_id"/>
+                                    <field name="project_id"/>
+                                    <field name="task_weight"/>
+                                    <field name="developer_id" invisible="0"/>
+                                    <field name="approval_status"/>
+                                    <field name="backlog_sprint_id" invisible="1"/>
+                                    <field name="status" invisible="0"/>
+                                    <field name="migration" invisible="0"/>
+                                    <field name="notes" invisible="0"/>
+                                    <field name="is_done" invisible="1"/>
+                                    <button name="migrate_yes" string="Migrate" type="object"
+                                            class="text-warning"
+                                            attrs="{'invisible': ['|',('is_done', '=', True),('state', '!=', 'closed')]}"/>
+                                    <field name="state" invisible="1"/>
+                                    <field name="hours" sum="Total Hours"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Backlog Sprint Bugs" name="sprint_lines_bugs">
+                            <div>
+                                <button name="%(act_open_select_products_view)d" type="action" string="Select Tasks"
+                                        context="{'default_flag_order': 'bug',
+                                        'default_sprint_id':active_id}"
+                                        class="oe_highlight"/>
+                                <button name="compute_status_bugs" type="object" string="Bugs Tasks Status"
+                                        attrs="{'invisible': [('state', '=', 'closed')]}"/>
+                            </div>
+                            <field name="backlog_sprint_bugs_ids" attrs="{'readonly': [('state', '=', 'closed')]}"
+                                   nolabel="0" widget="one2many" mode="tree">
+                                <tree string="Backlog Sprint Lines" editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="active" invisible="1"/>
+                                    <field name="task_ids" invisible="1" widget="many2many_tags"/>
+                                    <field name="task_bugs_ids" invisible="1" widget="many2many_tags"/>
+                                    <field name="task_line_bugs_ids" invisible="1" widget="many2many_tags"/>
+                                    <field name="task_id"/>
+                                    <field name="tag_ids" widget="many2many_tags"
+                                           options="{'color_field': 'color', 'no_create_edit': True}"/>
+                                    <field name="stage_id"/>
+                                    <field name="user_id"/>
+                                    <field name="project_id"/>
+                                    <field name="task_weight"/>
+                                    <field name="developer_id" invisible="0"/>
+                                    <field name="approval_status"/>
+                                    <field name="backlog_sprint_id" invisible="1"/>
+                                    <field name="status" invisible="0"/>
+                                    <field name="migration" invisible="0"/>
+                                    <field name="notes" invisible="0"/>
+                                    <field name="is_done" invisible="1"/>
+                                    <button name="migrate_yes" string="Migrate" type="object"
+                                            class="text-warning"
+                                            attrs="{'invisible': ['|',('is_done', '=', True),('state', '!=', 'closed')]}"/>
+                                    <field name="state" invisible="1"/>
+                                    <field name="hours" sum="Total Hours"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Project Progress" name="project_progress">
+                            <field name="project_progress_ids" readonly="1">
+                                <tree editable="bottom">
+                                    <field name="project_id"/>
+                                    <field name="num_of_tasks_approved" sum="Total"/>
+                                    <field name="num_of_tasks_done" sum="Total"/>
+                                    <field name="num_of_tasks_to_done" sum="Total"/>
+                                    <field name="project_progress" widget="progressbar"/>
+                                    <field name="backlog_sprint_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="select_sprint_tree" model="ir.ui.view">
+        <field name="name">sprint.backlog.tree</field>
+        <field name="model">sprint.backlog</field>
+        <field name="arch" type="xml">
+            <tree string="Sprint Backlog">
+                <field name="description"/>
+                <field name="sprint_progress" widget="progressbar"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_sprint_backlog_search" model="ir.ui.view">
+        <field name="name">sprint.backlog.search</field>
+        <field name="model">sprint.backlog</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="state"/>
+                <separator/>
+                <filter string="End Date" name="end_date" domain="[]" context="{'group_by':'end_date'}"/>
+                <filter string="Start Date" name="start_date" domain="[]" context="{'group_by':'start_date'}"/>
+                <filter string="Status" name="state" domain="[]" context="{'group_by':'state'}"/>
+            </search>
+        </field>
+    </record>
+    <record id="action_sprint_backlog" model="ir.actions.act_window">
+        <field name="name">Sprint Backlog</field>
+        <field name="res_model">sprint.backlog</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Backlog
+            </p>
+        </field>
+    </record>
+    <menuitem id="menu_sprint_backlog_parent"
+              name="Sprint Backlog"
+              parent="project.menu_main_pm"
+              sequence="20"
+              groups="sprint_backlog.group_sprint_lines,sprint_backlog.group_sprint"/>
+
+    <menuitem id="menu_sprint_backlog"
+              name="Sprint Backlog"
+              action="action_sprint_backlog"
+              parent="sprint_backlog.menu_sprint_backlog_parent"
+              sequence="10"
+              groups="sprint_backlog.group_sprint"/>
+</odoo>

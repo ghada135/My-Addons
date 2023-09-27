@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="select_sprint_form" model="ir.ui.view">
+        <field name="name">Select Sprint</field>
+        <field name="model">select.sprint</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="is_bug" invisible="1"/>
+                        <field name="sprint_id" domain="[('state','!=','closed')]"/>
+                        <field name="type" invisible="1"/>
+                        <field name="sprint_name_id" invisible="1"/>
+                        <field name="backlog_sprint_line_id" invisible="1"/>
+                        <field name="backlog_sprint_bug_id" invisible="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="migrate_yes" string="Migrate" type="object" class="btn-primary"/>
+                    <button name="close_sprint" string="Close Sprint" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_select_sprint" model="ir.actions.act_window">
+        <field name="name">Select Sprint</field>
+        <field name="res_model">select.sprint</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

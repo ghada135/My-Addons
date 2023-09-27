@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="close_sprint_form" model="ir.ui.view">
+        <field name="name">Close Sprint</field>
+        <field name="model">close.sprint</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <p>
+                        Do You want to Migrate Tasks To Another Sprint ?
+                    </p>
+                    <group>
+                        <field name="sprint_name_id" invisible="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="migrate_yes" string="Yes" type="object" class="btn-primary"/>
+                    <button name="close_sprint" string="Close Sprint" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_close_sprint" model="ir.actions.act_window">
+        <field name="name">Close Sprint</field>
+        <field name="res_model">close.sprint</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_task_form2_inherit_sale_timesheet" model="ir.ui.view">
+            <field name="name">view.task.form2.inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="sprint_control" invisible="1"/>
+                    <field name="developer_id" attrs="{'readonly': [('sprint_control', '=', False)]}"/>
+                    <field name="sprint_id" widget="many2many_tags"
+                           attrs="{'readonly': [('sprint_control', '=', False)]}"/>
+                    <field name="task_weight"
+                           attrs="{'readonly': [('sprint_control', '=', False)]}"/>
+                    <field name="task_periority"
+                           attrs="{'readonly': [('sprint_control', '=', False)]}"/>
+                    <field name="is_bug" invisible="1"/>
+                    <field name="sprinted" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_task_tree2_inherit_sale_timesheet" model="ir.ui.view">
+            <field name="name">view.task.tree.inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_tree2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="tag_ids" widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+

@@ -1,0 +1,38 @@
+{
+    'name': 'ITSS Sprint Backlog',
+    'summary': 'ITSS Sprint Backlog',
+    'author': "ITSS , Memy Mostafa",
+    'company': 'ITSS',
+    'website': "http://www.itss-c.com",
+    'version': '12.0.0.1.0',
+    'license': 'AGPL-3',
+    'sequence': 1,
+    'depends': [
+        'base',
+        'project',
+        'hr_timesheet',
+        'mail',
+    ],
+    'data': [
+        'security/security.xml',
+        'security/ir.model.access.csv',
+        'views/res_users.xml',
+        'views/tasks_view.xml',
+        'views/select_products_wizard_view.xml',
+        'views/sprint_backlog.xml',
+        'views/close_sprint.xml',
+        'views/select_sprint.xml',
+        'views/select_sprint_line.xml',
+        'views/mail_template_data.xml',
+        'views/project_progress.xml',
+        'views/project_task_type.xml',
+        'views/tags.xml',
+
+    ],
+    'demo': [
+        # 'demo/',
+    ],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+}

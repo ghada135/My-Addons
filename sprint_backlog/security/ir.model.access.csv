@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+sprint_backlog_id,model_sprint_backlog,model_sprint_backlog,,1,1,1,1
+sprint_backlog_line_id,model_sprint_backlog_line,model_sprint_backlog_line,,1,1,1,1
+sprint_backlog_bugs_id,model_sprint_backlog_bugs,model_sprint_backlog_bugs,,1,1,1,1
+close_sprint_id,model_close_sprint,model_close_sprint,,1,1,1,1
+select_sprint_id,model_select_sprint,model_select_sprint,,1,1,1,1
+select_products_id,model_select_products,model_select_products,,1,1,1,1
+project_progress_id,model_project_progress,model_project_progress,,1,1,1,1
