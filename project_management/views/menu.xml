@@ -1,0 +1,55 @@
+<data>
+    <menuitem id="project_management_pari"
+              name="Project Management"/>
+    <menuitem
+            id="my_project_menu"
+            parent="project_management_pari"
+            name="Projects"
+            sequence="10"/>
+    <menuitem
+            id="my_investors_menu"
+            parent="project_management_pari"
+            name="Investors"
+            sequence="20"/>
+    <menuitem
+            id="my_config_menu"
+            parent="project_management_pari"
+            name="Configuration"
+            sequence="30"/>
+    <menuitem
+            id="my_project_menu_child"
+            parent="my_project_menu"
+            name="Projects"
+            action="action_project_management"
+            sequence="10"/>
+    <menuitem
+            id="funding_source_menu"
+            parent="my_config_menu"
+            name="Funding Sources"
+            action="action_funding_source"
+            sequence="20"/>
+    <menuitem
+            id="investor_menu"
+            parent="my_investors_menu"
+            name="Investors"
+            action="action_investor_investor"
+            sequence="10"/>
+    <menuitem
+            id="investor_verified_menu"
+            parent="my_investors_menu"
+            name="Investors Verified"
+            action="action_investor_verified"
+            sequence="20"/>
+    <menuitem
+            id="investor_menu"
+            parent="my_investors_menu"
+            name="Investors"
+            action="action_investor_investor"
+            sequence="10"/>
+    <menuitem
+            id="sale_type_menu"
+            parent="my_config_menu"
+            name="Sale Type"
+            action="action_sale_type"
+            sequence="30"/>
+</data>

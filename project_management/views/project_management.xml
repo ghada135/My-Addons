@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="project_management_tree">
+            <field name="name">project.management.tree</field>
+            <field name="model">project.management</field>
+            <field name="arch" type="xml">
+                <tree create="true" edit="false">
+                    <field name="project_reference"/>
+                    <field name="project_name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="project_management_form">
+            <field name="name">project.management.form</field>
+            <field name="model">project.management</field>
+            <field name="arch" type="xml">
+                <form string="Project Management">
+                    <header>
+                        <button name="under_studying" string='Set To Under Studying' type="object" class="btn-primary"
+                                attrs="{'invisible': [('state','!=', 'new')]}"
+                                groups="project_management.group_under_studying"/>
+                        <button name="internal_approval" string='Waiting For Internal Approval' type="object"
+                                class="btn-primary" groups="project_management.group_internal_approval"
+                                attrs="{'invisible': [('state','!=', 'under_studying')]}"/>
+                        <button name="external_approval" string='Waiting For External Approval' type="object"
+                                class="btn-primary" groups="project_management.group_external_approval"
+                                attrs="{'invisible': [('state','!=', 'waiting_for_internal_approval')]}"/>
+
+                        <button name="implementation" string='Start Implementation' type="object"
+                                class="btn-primary" groups="project_management.group_implementation"
+                                attrs="{'invisible': [('state','!=', 'waiting_for_external_approval')]}"/>
+                        <button name="implemented" string='Set To Implemented' type="object"
+                                class="btn-primary" groups="project_management.group_implemented"
+                                attrs="{'invisible': [('state','!=', 'start_implementation')]}"/>
+
+                        <button name="delivary" string='Delivery Of Units' type="object"
+                                class="btn-primary" groups="project_management.group_delivary"
+                                attrs="{'invisible': [('state','!=', 'implemented')]}"/>
+
+                        <button name="action_job_cost" string='Create Job Cost' type="object" class="btn-primary"
+                                attrs="{'invisible': ['|',('job_cost_created','=', True),('state','!=', 'under_studying')]}"/>
+
+                        <button name="create_units" string='Create Units' type="object" class="btn-warning"
+                                attrs="{'invisible': ['|',('state','=', 'new'),('unit_created','=', True)]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="new,under_studying"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="open_job_cost" string="Job Cost Sheet" type="object"
+                                    attrs="{'invisible': ['|',('job_cost_created','!=', True),('state','=', 'new')]}"
+                                    icon="fa-plus-square" class="oe_stat_button"/>
+                            <button name="open_units" string="Units" type="object"
+                                    attrs="{'invisible': [('unit_created','!=', True)]}"
+                                    icon="fa-building" class="oe_stat_button"/>
+                        </div>
+                        <div class="oe_title">
+                            <label for="project_name" string="Project Name"/>
+                            <h1>
+                                <field name="project_name" class="oe_inline" required="1" placeholder="برج خليفه"
+                                       attrs="{'readonly': [('state', '!=', 'new'),('has_group', '=', False)]}"/>
+                            </h1>
+                        </div>
+                        <div class="oe_title">
+                            <label for="project_reference" string=""/>
+                            <h2>
+                                <field name="project_reference" class="oe_inline" readonly="1" placeholder="Project/"/>
+                            </h2>
+                        </div>
+                        <group string="Project Details">
+                            <group>
+                                <label for="street" string="Address"/>
+                                <div class="o_address_format">
+                                    <field name="street" placeholder="Street..." class="o_address_street" required="1"
+                                           attrs="{'readonly': [('state', '!=', 'new'),('has_group', '=', False)]}"/>
+                                    <field name="street2" placeholder="Street 2..." class="o_address_street"
+                                           required="1"
+                                           attrs="{'readonly': [('state', '!=', 'new'),('has_group', '=', False)]}"/>
+                                    <field name="township" placeholder="Township..." class="o_address_street"
+                                           required="1"
+                                           attrs="{'readonly': [('state', '!=', 'new'),('has_group', '=', False)]}"/>
+                                    <field name="city" placeholder="City" class="o_address_city" required="1"
+                                           attrs="{'readonly': [('state', '!=', 'new'),('has_group', '=', False)]}"/>
+                                    <field name="state_id" class="o_address_state" placeholder="State"
+                                           options='{"no_open": True}' required="1"
+                                           attrs="{'readonly': [('state', '!=', 'new'),('has_group', '=', False)]}"/>
+                                    <field name="zip" placeholder="ZIP" class="o_address_zip"
+                                           attrs="{'readonly': [('state', '!=', 'new'),('has_group', '=', False)]}"/>
+                                    <field name="country_id" placeholder="Country" class="o_address_country"
+                                           options='{"no_open": True, "no_create": True}'
+                                           attrs="{'readonly': [('state', '!=', 'new'),('has_group', '=', False)]}"/>
+                                </div>
+                                <separator/>
+                                <field name="expected_cost" required="1"
+                                       attrs="{'readonly': [('state', '!=', 'new'),('has_group', '=', False)]}"/>
+                                <field name="actual_cost" required="0"
+                                       attrs="{'readonly': [('state', '!=', 'new'),('has_group', '=', False)]}"/>
+                                <field name="start_date" required="1"
+                                       attrs="{'readonly': [('state', '!=', 'new'),('has_group', '=', False)]}"/>
+                                <field name="end_date" required="1"
+                                       attrs="{'readonly': [('state', '!=', 'new'),('has_group', '=', False)]}"/>
+                            </group>
+                            <group>
+                                <field name="project_product_type_ids" widget="many2many_tags" required="1"
+                                       attrs="{'readonly': [('state', '!=', 'new'),('has_group', '=', False)]}"/>
+                                <field name="funding_sources_ids" widget="many2many_tags" required="1"
+                                       attrs="{'readonly': [('state', '!=', 'new'),('has_group', '=', False)]}"/>
+                                <field name="project_manager_id" widget="many2one_tags" required="1"
+                                       attrs="{'readonly': [('state', '!=', 'new'),('has_group', '=', False)]}"/>
+                                <field name="project_engineer_id" widget="many2one_tags" required="1"
+                                       attrs="{'readonly': [('state', '!=', 'new'),('has_group', '=', False)]}"/>
+                                <field name="consultation_office" widget="many2one_tags"
+                                       required="1"
+                                       attrs="{'readonly': [('state', '!=', 'new'),('has_group', '=', False)]}"/>
+                                <field name="type_id" widget="many2one_tags"
+                                       required="1"
+                                       attrs="{'readonly': [('state', '!=', 'new'),('has_group', '=', False)]}"/>
+                            </group>
+                        </group>
+
+                        <group>
+                            <field name="analytic_account_id" invisible="1"/>
+                            <field name="job_cost_created" invisible="1"/>
+                            <field name="has_group" invisible="1"/>
+                            <field name="property_id" invisible="1"/>
+                            <field name="project_project_id" invisible="1"/>
+                            <field name="unit_created" invisible="1"/>
+                        </group>
+                        <notebook>
+                            <page string="Project Products" name="project_products">
+                                <field name="project_type_ids" widget="one2many">
+                                    <tree editable="bottom" style="color: red">
+                                        <field name="project_id" invisible="1"/>
+                                        <field name="type_id" invisible="0" domain="[('id','in',type_ids)]"/>
+                                        <field name="type_ids" invisible="1" widget="many2many_tags"/>
+                                        <field name="type_name" invisible="0"/>
+                                        <field name="unit_number" invisible="0"/>
+                                        <field name="area" invisible="0"/>
+                                        <field name="floor_number_id" invisible="0" required="1"/>
+                                        <field name="setting_rooms_number" invisible="0"/>
+                                        <field name="bed_rooms_number" invisible="0"/>
+                                        <field name="halls" invisible="0"/>
+                                        <field name="bath_rooms" invisible="0"/>
+                                        <field name="kitchens" invisible="0"/>
+                                        <field name="sale_type_id" invisible="0"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Official Papers" name="official_paper">
+                                <field name="official_papers_ids" widget="one2many">
+                                    <tree editable="bottom">
+                                        <field name="project_papers_id" invisible="1"/>
+                                        <field name="paper_name"/>
+                                        <field name="paper_description"/>
+                                        <field name="upload"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Responsibles" name="responsibles">
+                                <field name="responsibles_ids" widget="one2many">
+                                    <tree editable="bottom">
+                                        <field name="project_responsibles_id" invisible="1"/>
+                                        <field name="user_id"/>
+                                        <field name="job_id"/>
+                                        <field name="phone" widget="phone"/>
+                                        <field name="email"/>
+                                        <field name="notes"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_project_management" model="ir.actions.act_window">
+            <field name="name">Project Management</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">project.management</field>
+            <field name="view_mode">tree,form</field>
+            <field name="binding_view_types">form</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="investor_investor_tree">
+            <field name="name">investor.investor.tree</field>
+            <field name="model">investor.investor</field>
+            <field name="arch" type="xml">
+                <tree create="true" edit="false">
+                    <field name="reference"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="investor_investor_form">
+            <field name="name">investor.investor.form</field>
+            <field name="model">investor.investor</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="waiting_verification" string='Waiting Verification' type="object"
+                                class="btn-primary"
+                                attrs="{'invisible': [('state','!=', 'new')]}"/>
+                        <button name="create_payment" string='Create Payment' type="object"
+                                class="btn-primary"
+                                attrs="{'invisible': ['|',('payment_id','!=',False ),('state','!=', 'waiting_verification')]}"/>
+                        <button name="verified" string='Verified' type="object"
+                                class="btn-primary"
+                                attrs="{'invisible': [('state','!=', 'waiting_verification')]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="new,waiting_verification,verified"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="open_payment" string="Open Payment" type="object"
+                                    attrs="{'invisible': [('payment_id','=', False)]}"
+                                    icon="fa-plus-square" class="oe_stat_button"/>
+                        </div>
+                        <div class="oe_title">
+                            <label for="reference" string=""/>
+                            <h2>
+                                <field name="reference" class="oe_inline" readonly="1" placeholder="Project/"/>
+                            </h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="partner_id" required="1"/>
+                                <field name="investor_number_id" required="1"/>
+                                <field name="bank_account_number" required="1"/>
+                                <field name="journal_id" required="1"/>
+                                <field name="payment_id" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="investor_history" string="Investor History">
+
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_investor_investor" model="ir.actions.act_window">
+            <field name="name">Investors</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">investor.investor</field>
+            <field name="view_mode">tree,form</field>
+            <field name="binding_view_types">form</field>
+        </record>
+
+    </data>
+</odoo>

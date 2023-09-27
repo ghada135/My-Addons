@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="investor_verified_tree">
+            <field name="name">investor.verified.tree</field>
+            <field name="model">investor.verified</field>
+            <field name="arch" type="xml">
+                <tree create="true" edit="false">
+                    <field name="reference"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="investor_verified_form">
+            <field name="name">investor.verified.form</field>
+            <field name="model">investor.verified</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="new,waiting_verification,verified"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="open_payment" string="Open Payment" type="object"
+                                    attrs="{'invisible': [('payment_id','=', False)]}"
+                                    icon="fa-bars" class="oe_stat_button"/>
+                        </div>
+                        <div class="oe_title">
+                            <label for="reference" string=""/>
+                            <h2>
+                                <field name="reference" class="oe_inline" readonly="1" placeholder="Project/"/>
+                            </h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="payment_id"/>
+                            </group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="investor_number_id"/>
+                                <field name="bank_account_number"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_investor_verified" model="ir.actions.act_window">
+            <field name="name">Investors Verified</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">investor.verified</field>
+            <field name="view_mode">tree,form</field>
+            <field name="binding_view_types">form</field>
+        </record>
+
+    </data>
+</odoo>

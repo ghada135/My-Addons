@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="project_seq" model="ir.sequence">
+            <field name="name">Project Management</field>
+            <field name="code">project.management</field>
+            <field name="prefix">Project/</field>
+            <field name="padding">4</field>
+        </record>
+        <record id="investor_seq" model="ir.sequence">
+            <field name="name">Investor</field>
+            <field name="code">investor.investor</field>
+            <field name="prefix">Investor/</field>
+            <field name="padding">4</field>
+        </record>
+        <record id="investor_verified_seq" model="ir.sequence">
+            <field name="name">Investor</field>
+            <field name="code">investor.verified</field>
+            <field name="prefix">Verified/Invest/</field>
+            <field name="padding">4</field>
+        </record>
+    </data>
+</odoo>

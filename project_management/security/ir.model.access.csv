@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+project_management,project_management,model_project_management,,1,1,1,1
+project_type,project_type,model_project_type,,1,1,1,1
+team_work,team_work,model_team_work,,1,1,1,1
+funding_source,funding_source,model_funding_source,,1,1,1,1
+investor_investor,investor_investor,model_investor_investor,,1,1,1,1
+investor_verified,investor_verified,model_investor_verified,,1,1,1,1
+official_papers,official_papers,model_official_papers,,1,1,1,1
+sale_type,sale_type,model_sale_type,,1,1,1,1
+responsibles,responsibles,model_responsibles,,1,1,1,1
