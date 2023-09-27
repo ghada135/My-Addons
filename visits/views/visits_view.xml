@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="visit_visit_tree">
+            <field name="name">visit.visit.tree</field>
+            <field name="model">visit.visit</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="visit_reference"/>
+                    <field name="customer_id"/>
+                    <field name="visit_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="visit_visit_form">
+            <field name="name">visit.visit.form</field>
+            <field name="model">visit.visit</field>
+            <field name="arch" type="xml">
+                <form string="Visit">
+                    <sheet>
+                        <div class="oe_title" >
+                            <label for="visit_reference" string="Visit Reference"/>
+                            <h1>
+                                <field name="visit_reference" class="oe_inline" readonly="1"/>
+                            </h1>
+                        </div>
+                        <div class="oe_title" >
+                            <label for="customer_id" string="Customer"/>
+                            <h2>
+                                <field name="customer_id" class="oe_inline" readonly="0" required="1"/>
+                            </h2>
+                        </div>
+                        <group string="Customer Details" >
+                            <field name="age"/>
+                            <field name="work" required="1"/>
+                            <field name="visit_date" required="1"/>
+                        </group>
+
+                        <group string="Visit Details" >
+                            <group>
+                                <field name="martial_state" widget="radio"/>
+                                <field name="allergy" widget="radio"/>
+                                <field name="financials" widget="radio"/>
+                                <field name="hours_sleep" widget="radio"/>
+                                <field name="food_craving" widget="radio"/>
+
+                            </group>
+                            <group>
+                                <field name="type_of_wls" widget="radio"/>
+                                <field name="contraceptive_method" widget="radio"/>
+                            </group>
+                        </group>
+                        <group string="Comorbidities" >
+                            <group name="diabetes" string="Diabetes Illness">
+                                <field name="diabetes" widget="radio"/>
+                                <label for="diabetes_duraton"/>
+                                <div>
+                                    <field name="diabetes_duraton" class="oe_inline"/>
+                                    <field name="duration_type" class="oe_inline"/>
+                                </div>
+                                <field name="diabetes_medication" widget="radio"/>
+                            </group>
+                            <group name="htn" string="HTN Illness" >
+                                <field name="htn" widget="radio"/>
+                                <label for="htn_duraton"/>
+                                <div>
+                                    <field name="htn_duraton" class="oe_inline"/>
+                                    <field name="duration_type" class="oe_inline"/>
+                                </div>
+                                <field name="htn_medication" widget="radio"/>
+                            </group>
+                        </group>
+                        <separator/>
+                        <group string="Comparison" >
+                            <field name="comparison_ids" string="">
+                                <tree editable="bottom">
+                                    <field name="illness_name"/>
+                                    <field name="before_surgery"/>
+                                    <field name="after_surgery"/>
+                                    <field name="visit_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <separator/>
+                        <group >
+                            <group>
+                                <field name="dyslipidemia" widget="radio"/>
+                                <field name="sleep_apnea" widget="radio"/>
+                                <field name="reflux" widget="radio"/>
+                                <field name="gall_bladder_disease" widget="radio"/>
+                                <field name="thyroid_dysfunction" widget="radio"/>
+                            </group>
+                            <group>
+                                <field name="medications_Eltroxin" widget="radio" />
+                                <field name="dose" widget="radio"/>
+                            </group>
+                        </group>
+                        <group name="appraisail" string="Appraisal per visit" >
+                            <group>
+                                <label for="weight"/>
+                                <div>
+                                    <field name="weight" class="oe_inline"/>
+                                    <field name="kg" readonly="1" class="oe_inline"/>
+                                </div>
+                                <label for="height"/>
+                                <div>
+                                    <field name="height" class="oe_inline"/>
+                                    <field name="cm" readonly="1" class="oe_inline"/>
+                                </div>
+                                <field name="muscle_mass"/>
+                                <field name="fat_mass"/>
+                            </group>
+                            <group>
+                                <label for="water"/>
+                                <div>
+                                    <field name="water" class="oe_inline"/>
+                                    <field name="cups" readonly="1" class="oe_inline"/>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="hydration"/>
+                                <separator/>
+                                <field name="exercises" widget="radio"/>
+                                <field name="multivitamins" widget="radio"/>
+                                <field name="hair_supplementation" widget="radio"/>
+                                <field name="iron" widget="radio"/>
+                            </group>
+                            <group>
+                                <field name="ca" widget="radio"/>
+                                <field name="Vit_D" widget="radio"/>
+                                <field name="folic_acid" widget="radio"/>
+                                <field name="vit_b12" widget="radio"/>
+                                <field name="protein" widget="radio"/>
+                                <field name="ppis" widget="radio"/>
+                            </group>
+
+                            <group name="problem_list" string="Problem List Per Visit" >
+                                <group>
+                                    <field name="nausea"/>
+                                    <field name="vomiting"/>
+                                    <field name="diarrhea"/>
+                                    <field name="burping"/>
+                                    <field name="de_hydration"/>
+                                </group>
+                                <group>
+                                    <field name="constipation"/>
+                                    <field name="low_food_intake"/>
+                                    <field name="low_protein_intake"/>
+                                    <field name="bad_adherence"/>
+                                    <field name="hair_loss"/>
+                                </group>
+                            </group>
+                        </group>
+                        <separator/>
+                        <group name="early_postoperative" string="Early Postoperative Complicate" >
+                            <field name="criteria_ids" string="">
+                                <tree editable="bottom">
+                                    <field name="visit"/>
+                                    <field name="criteria"/>
+                                    <field name="intervension"/>
+                                    <field name="visit_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_visit_visit" model="ir.actions.act_window">
+            <field name="name">Visit Visit</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">visit.visit</field>
+            <field name="view_mode">tree,form</field>
+            <field name="binding_view_types">form</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+visit_visit,visit_visit,model_visit_visit,,1,1,1,1
+visit_lines,visit_lines,model_visit_lines,,1,1,1,1
+illness_comparison,illness_comparison,model_illness_comparison,,1,1,1,1
+criteria_criteria,criteria_criteria,model_criteria_criteria,,1,1,1,1

@@ -1,0 +1,9 @@
+<data>
+
+    <menuitem
+            id="visit_menu"
+            parent="account.menu_account_config"
+            name="Visits"
+            action="action_visit_visit"
+            sequence="10"/>
+</data>
