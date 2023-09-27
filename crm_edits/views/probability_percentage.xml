@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="probability_percentage_action" model="ir.actions.act_window">
+        <field name="name">Probability Percentage</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">prop.percentage</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p>
+            </p>
+        </field>
+    </record>
+    <record id="probability_percentage_view_tree" model="ir.ui.view">
+        <field name="name">prop.percentage.view.tree</field>
+        <field name="model">prop.percentage</field>
+        <field name="arch" type="xml">
+            <tree string="Probability percentage">
+                <field name="prob_name"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="probability_percentage_view_form" model="ir.ui.view">
+        <field name="name">prop.percentage.view.form</field>
+        <field name="model">prop.percentage</field>
+        <field name="arch" type="xml">
+            <form string="Probability">
+                <sheet>
+                    <group>
+                        <field name="prob_name"/>
+                        <field name="from_state"/>
+                        <field name="to_state"/>
+
+                        <field name="prob_State_id" options="{'no_create': True, 'no_open': True}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+<!--    <menuitem id="menu_probability_percentage_action"-->
+<!--              action="probability_percentage_action"-->
+<!--              name="Probability Percentage"-->
+<!--              parent="crm.menu_crm_config_lead"-->
+<!--              sequence="2"/>-->
+</odoo>

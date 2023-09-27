@@ -1,0 +1,20 @@
+<odoo>
+
+    <record id="view_crm_lead2opportunity_partner" model="ir.ui.view">
+        <field name="name">crm.lead2opportunity.partner.inherit</field>
+        <field name="model">crm.lead2opportunity.partner</field>
+        <field name="inherit_id" ref="crm.view_crm_lead2opportunity_partner"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='team_id']" position="after">
+                <field name="expected_revenue" invisible="1"/>
+                <field name="company_currency" invisible="1"/>
+                <field name="company_id" invisible="1"/>
+                <field name="reference" invisible="1"/>
+                <field name="existing_market_place" invisible="1"/>
+                <field name="poc" invisible="1"/>
+                <field name="account_manager_id" invisible="1"/>
+                <field name="appraisals_id" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+sigment_type_id,sigment_type,model_sigment_type,,1,1,1,1
+client_type_id,client_type,model_client_type,,1,1,1,1
+industry_type_id,industry_type,model_industry_type,,1,1,1,1
+lead_type_id,lead_type,model_lead_type,,1,1,1,1
+prop_state_id,prop_state,model_prop_state,,1,1,1,1
+prop_percentage_id,prop_percentage,model_prop_percentage,,1,1,1,1

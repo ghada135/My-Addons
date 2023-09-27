@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="sigmentation_type_action" model="ir.actions.act_window">
+        <field name="name">Segmentation Type</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sigment.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p>
+            </p>
+        </field>
+    </record>
+    <record id="sigment_type_view_form" model="ir.ui.view">
+        <field name="name">sigment.type.view.form</field>
+        <field name="model">sigment.type</field>
+        <field name="arch" type="xml">
+            <form string="Segment">
+                <sheet>
+                    <group>
+                        <field name="sigment_name"/>
+                        <field name="sigment_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="sigmentation_type_view_form" model="ir.ui.view">
+        <field name="name">sigment.type.view.form</field>
+        <field name="model">sigment.type</field>
+        <field name="arch" type="xml">
+            <tree string="Segmentation">
+                <field name="sigment_name"/>
+                <field name="sigment_id"/>
+            </tree>
+        </field>
+    </record>
+    <menuitem id="menu_sigmentation_type_action"
+              action="sigmentation_type_action" name="Market Segmentation Type"
+              parent="crm.menu_crm_config_lead"
+              sequence="5"/>
+</odoo>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="industry_type_action" model="ir.actions.act_window">
+        <field name="name">Industry Type</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">industry.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p>
+                You must define a product for everything you sell or purchase,
+                whether it's a storable product, a consumable or a service.
+            </p>
+        </field>
+    </record>
+    <record id="industry_type_view_tree" model="ir.ui.view">
+        <field name="name">industry.type.view.tree</field>
+        <field name="model">industry.type</field>
+        <field name="arch" type="xml">
+            <tree string="Industry">
+                <field name="industry_name"/>
+                <field name="industry_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="industry_type_view_form" model="ir.ui.view">
+        <field name="name">industry.type.view.form</field>
+        <field name="model">industry.type</field>
+        <field name="arch" type="xml">
+            <form string="Industry">
+                <sheet>
+                    <group>
+                        <field name="industry_name"/>
+                        <field name="industry_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <menuitem id="menu_industry_type_action"
+              action="industry_type_action"
+              name="Industry Types"
+              parent="crm.menu_crm_config_lead"
+              sequence="4"/>
+</odoo>

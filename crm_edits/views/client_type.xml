@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="client_type_view_form" model="ir.ui.view">
+        <field name="name">client.type.view.form</field>
+        <field name="model">client.type</field>
+        <field name="arch" type="xml">
+            <form string="Sector">
+                <sheet>
+                    <group>
+                        <field name="client_name"/>
+                        <field name="is_government"/>
+                        <field name="sector_id"/>
+<!--                        <field name="government_cr" attrs="{'invisible': [('is_government', '!=', True)]}"/>-->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="client_type_action" model="ir.actions.act_window">
+        <field name="name">Sector Type</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">client.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p>
+            </p>
+        </field>
+    </record>
+
+    <record id="client_type_view_tree" model="ir.ui.view">
+        <field name="name">client.type.view.tree</field>
+        <field name="model">client.type</field>
+        <field name="arch" type="xml">
+            <tree string="Sector">
+                <field name="client_name"/>
+                <field name="sector_id"/>
+            </tree>
+        </field>
+    </record>
+    <menuitem id="menu_client_type_action"
+              action="client_type_action"
+              name="Sector Types"
+              parent="crm.menu_crm_config_lead"
+              sequence="3"/>
+</odoo>

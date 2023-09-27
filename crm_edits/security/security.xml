@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="group_crm_delete_responsible" model="res.groups">
+        <field name="name">Crm Delete</field>
+    </record>
+
+</odoo>
